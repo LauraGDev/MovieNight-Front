@@ -4,6 +4,6 @@
 
 @layer base {
     body {
-        @apply bg-bgPurple h-full font-lora text-whiteText text-base m-0
+        @apply font-lora text-whiteText text-base m-0 min-h-full
     }
 }

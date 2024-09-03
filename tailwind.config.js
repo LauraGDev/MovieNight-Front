@@ -22,7 +22,10 @@ export default {
                 base: "0.938rem",
                 "3xl": "1.813rem",
                 "4xl": "2.5rem"
-              }
+            },
+            backgroundImage: {
+                'popcorn': "url('./assets/popcorn-background.jpg')"
+            }
         },
     },
     plugins: [],
