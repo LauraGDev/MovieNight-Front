@@ -1,11 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "../components/header/Header";
 
 const Layout = () => {
-  return (
-    <main className="px-5">
-        <Outlet/>
-    </main>
-  )
-}
+    const location = useLocation();
+    const noHeaderRoutes = ["/", "/registro", "/inicio-sesion"];
+    const showHeader = !noHeaderRoutes.includes(location.pathname);
+    const backgroundClass = noHeaderRoutes.includes(location.pathname)
+        ? "bg-center bg-popcorn bg-[length:144.125rem] bg-[-77.5rem_-21.625rem] bg-no-repeat"
+        : "bg-bgPurple";
 
-export default Layout
+    return (
+        <div className={`min-h-screen ${backgroundClass} leading-5`}>
+            {!showHeader &&
+            <div className="absolute inset-0 bg-bgPurple opacity-90"></div>}
+            {showHeader && <Header />}
+            <main className="px-5 relative z-10">
+                <Outlet />
+            </main>
+        </div>
+    );
+};
+
+export default Layout;
