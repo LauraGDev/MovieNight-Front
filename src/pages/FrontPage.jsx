@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import Button from "../components/header/buttons/Button";
+import Button from "../components/buttons/Button";
 
 const FrontPage = () => {
     const navigate = useNavigate();
