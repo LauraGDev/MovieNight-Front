@@ -25,6 +25,9 @@ export default {
             },
             backgroundImage: {
                 'popcorn': "url('./assets/popcorn-background.jpg')"
+            },
+            borderRadius: {
+                sm: "0.313rem"
             }
         },
     },
