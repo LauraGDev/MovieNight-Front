@@ -1,10 +1,15 @@
+import Return from "../components/buttons/Return";
+import SignInForm from "../components/forms/SignInForm";
 
 const SignIn = () => {
-  return (
-    <div>
-      signin
-    </div>
-  )
-}
 
-export default SignIn
+    return (
+        <section>
+            <img src="./MovieNight-logo.svg" alt="MovieNight" className="mx-auto mt-6 mb-9" />
+            <Return route="/"/>
+            <SignInForm />
+        </section>
+    );
+};
+
+export default SignIn;
