@@ -2,14 +2,13 @@ import Return from "../components/buttons/Return";
 import SignInForm from "../components/forms/SignInForm";
 
 const SignIn = () => {
-    const handleSubmit = () => {
-        alert("Usuario Registrado");
-    };
+
     return (
-        <div>
+        <section>
+            <img src="./MovieNight-logo.svg" alt="MovieNight" className="mx-auto mt-6 mb-9" />
             <Return route="/"/>
-            <SignInForm onSubmit={handleSubmit} />
-        </div>
+            <SignInForm />
+        </section>
     );
 };
 
