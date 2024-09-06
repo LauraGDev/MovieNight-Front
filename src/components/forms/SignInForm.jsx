@@ -25,7 +25,7 @@ const SignInForm = () => {
     return (
         <form
             onSubmit={onSubmit}
-            className="flex flex-col gap-6 bg-primary bg-opacity-[0.5] px-[1.625rem] pt-8 pb-[3.75rem] rounded-lg"
+            className="flex flex-col gap-8 bg-primary bg-opacity-[0.5] px-[1.625rem] pt-8 pb-[3.75rem] rounded-lg"
         >
             <h1 className="text-center leading-8 pb-2 font-syne text-3xl font-extrabold text-primary">
                 Nuevo usuario
@@ -84,7 +84,7 @@ const SignInForm = () => {
                 text="Registro"
                 type="submit"
                 color="primary"
-                styles="mt-2"
+                styles="mt-5"
             />
         </form>
     );
