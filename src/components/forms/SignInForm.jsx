@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { requestHandler } from "../../services/requestHandler"
+import { URL_API_SIGNIN } from "../../config/urls";
 import Button from "../buttons/Button";
 import TextInput from "./inputs/TextInput";
 
@@ -7,8 +10,9 @@ const SignInForm = () => {
         register,
         handleSubmit,
         formState: { errors },
-        watch
+        watch,
     } = useForm();
+    const navigate = useNavigate();
 
     const placeholders = {
         name: "Introduce el nombre del perfil principal...",
@@ -17,14 +21,25 @@ const SignInForm = () => {
         passConf: "Introduce de nuevo la contraseña...",
     };
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(data); //Aquí el post
-    });
-    
+    const onSubmit = async (data) => {
+        const newUser = {
+            name: data.name,
+            email: data.email.toLowerCase(),
+            password: data.password,
+        };
+
+        try {
+            await requestHandler(URL_API_SIGNIN, "POST", newUser);
+            alert("Usuario registrado con éxito!");
+            navigate("/inicio-sesion");
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+        }
+    };
 
     return (
         <form
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-8 bg-primary bg-opacity-[0.5] px-[1.625rem] pt-8 pb-[3.75rem] rounded-lg"
         >
             <h1 className="text-center leading-8 pb-2 font-syne text-3xl font-extrabold text-primary">
@@ -44,10 +59,10 @@ const SignInForm = () => {
                 type="text"
                 {...register("email", {
                     required: "Debes introducir un email",
-                    pattern:{
+                    pattern: {
                         value: /[^@\s]+@[^@\s]+\.[^@\s]+/,
-                        message: "Introduce un email válido"
-                    }
+                        message: "Introduce un email válido",
+                    },
                 })}
                 label="Email"
                 id="email"
@@ -58,22 +73,25 @@ const SignInForm = () => {
                 type="password"
                 {...register("password", {
                     required: "Debes introducir una contraseña",
-                    minLength:{
+                    minLength: {
                         value: 8,
-                        message: "La contraseña debe tener al menos 8 caracteres."
-                    }
+                        message:
+                            "La contraseña debe tener al menos 8 caracteres.",
+                    },
                 })}
                 label="Contraseña"
                 id="password"
                 placeholder={placeholders.password}
                 error={errors.password?.message}
-                
             />
             <TextInput
                 type="password"
                 {...register("passConfirm", {
                     required: "Debes volver a introducir la contraseña",
-                    validate: value => value === watch("password") ? true : "Las contraseñas no coinciden"
+                    validate: (value) =>
+                        value === watch("password")
+                            ? true
+                            : "Las contraseñas no coinciden",
                 })}
                 label="Confirma la contraseña"
                 id="passConfirm"
