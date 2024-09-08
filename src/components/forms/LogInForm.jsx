@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { requestHandler } from "../../services/requestHandler"
-import { URL_API_SIGNIN } from "../../config/urls";
+import { requestHandler } from "../../services/requestHandler";
+import { URL_API_LOGIN } from "../../config/urls";
 import Button from "../buttons/Button";
 import TextInput from "./inputs/TextInput";
 
-const SignInForm = () => {
+const LogInForm = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
     } = useForm();
     const navigate = useNavigate();
 
@@ -22,23 +21,18 @@ const SignInForm = () => {
     };
 
     const onSubmit = async (data) => {
-        const newUser = {
-            name: data.name,
+        const user = {
             email: data.email.toLowerCase(),
             password: data.password,
         };
 
         try {
-            await requestHandler(URL_API_SIGNIN, "POST", newUser);
-            alert("Usuario registrado con éxito!");
-            navigate("/inicio-sesion");
+            const response = await requestHandler(URL_API_LOGIN, "POST", user);
+            console.log(response)
+            alert(`Bienvenid@ de nuevo ${response.user.name}`);
+            navigate("/");
         } catch (error) {
-            if (error.status == 409) {
-                alert(`Error: ${error.message}`);
-                navigate("/inicio-sesion")
-            } else {
-                alert(error.message);
-            }
+            alert(error.message);
         }
     };
 
@@ -48,18 +42,8 @@ const SignInForm = () => {
             className="flex flex-col gap-8 bg-primary bg-opacity-[0.5] px-[1.625rem] pt-8 pb-[3.75rem] rounded-lg"
         >
             <h1 className="text-center leading-8 pb-2 font-syne text-3xl font-extrabold text-primary">
-                Nuevo usuario
+                Iniciar Sesión
             </h1>
-            <TextInput
-                type="text"
-                {...register("name", {
-                    required: "Debes introducir tu nombre",
-                })}
-                label="Nombre"
-                id="name"
-                placeholder={placeholders.name}
-                error={errors.name?.message}
-            />
             <TextInput
                 type="text"
                 {...register("email", {
@@ -77,34 +61,15 @@ const SignInForm = () => {
             <TextInput
                 type="password"
                 {...register("password", {
-                    required: "Debes introducir una contraseña",
-                    minLength: {
-                        value: 8,
-                        message:
-                            "La contraseña debe tener al menos 8 caracteres.",
-                    },
+                    required: "Debes introducir una contraseña"
                 })}
                 label="Contraseña"
                 id="password"
                 placeholder={placeholders.password}
                 error={errors.password?.message}
             />
-            <TextInput
-                type="password"
-                {...register("passConfirm", {
-                    required: "Debes volver a introducir la contraseña",
-                    validate: (value) =>
-                        value === watch("password")
-                            ? true
-                            : "Las contraseñas no coinciden",
-                })}
-                label="Confirma la contraseña"
-                id="passConfirm"
-                placeholder={placeholders.passConf}
-                error={errors.passConfirm?.message}
-            />
             <Button
-                text="Registro"
+                text="Iniciar Sesión"
                 type="submit"
                 color="primary"
                 styles="mt-5"
@@ -113,4 +78,4 @@ const SignInForm = () => {
     );
 };
 
-export default SignInForm;
+export default LogInForm;

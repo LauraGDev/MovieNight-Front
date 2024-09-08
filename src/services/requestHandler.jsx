@@ -12,11 +12,13 @@ export const requestHandler = async (url, method = "GET", data, authentication =
             }
         );
         if (!response.ok) {
-            throw new Error(`${response.status}`);
+            const errorData = await response.json();
+            throw { status: errorData.statusCode, message: errorData.message };
         }
         const json_data = await response.json();
         return json_data;
     } catch (error) {
-        return error;
+        console.error("Error en la solicitud:", error.message);
+        throw error;
     }
 };
