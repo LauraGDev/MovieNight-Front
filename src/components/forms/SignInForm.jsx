@@ -33,7 +33,12 @@ const SignInForm = () => {
             alert("Usuario registrado con éxito!");
             navigate("/inicio-sesion");
         } catch (error) {
-            console.log(`Error: ${error.message}`);
+            if (error.status == 409) {
+                alert(`Error: ${error.message}`);
+                navigate("/inicio-sesion")
+            } else {
+                alert(error.message);
+            }
         }
     };
 

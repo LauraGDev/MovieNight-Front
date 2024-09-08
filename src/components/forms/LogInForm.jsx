@@ -28,13 +28,11 @@ const LogInForm = () => {
 
         try {
             const response = await requestHandler(URL_API_LOGIN, "POST", user);
-            if (!response.ok) {
-                throw new Error(response.message);
-            }
-            console.log(response);
+            console.log(response)
+            alert(`Bienvenid@ de nuevo ${response.user.name}`);
             navigate("/");
         } catch (error) {
-            console.log(`Error: ${error.message}`);
+            alert(error.message);
         }
     };
 
