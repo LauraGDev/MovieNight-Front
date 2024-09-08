@@ -27,13 +27,17 @@ const LogInForm = () => {
         };
 
         try {
-            const data = await requestHandler(URL_API_LOGIN, "POST", user);
-            console.log(data);
+            const response = await requestHandler(URL_API_LOGIN, "POST", user);
+            if (!response.ok) {
+                throw new Error(response.message);
+            }
+            console.log(response);
             navigate("/");
         } catch (error) {
             console.log(`Error: ${error.message}`);
         }
     };
+
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
