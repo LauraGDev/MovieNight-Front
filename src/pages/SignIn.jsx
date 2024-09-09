@@ -25,7 +25,7 @@ const SignIn = () => {
     };
 
     return (
-        <section>
+        <section className="mb-28">
             <img src="./MovieNight-logo.svg" 
             alt="MovieNight" 
             className="mx-auto pt-6 mb-9" />
