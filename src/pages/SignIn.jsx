@@ -5,7 +5,7 @@ const SignIn = () => {
 
     return (
         <section>
-            <img src="./MovieNight-logo.svg" alt="MovieNight" className="mx-auto mt-6 mb-9" />
+            <img src="./MovieNight-logo.svg" alt="MovieNight" className="mx-auto pt-6 mb-9" />
             <Return route="/"/>
             <SignInForm />
         </section>

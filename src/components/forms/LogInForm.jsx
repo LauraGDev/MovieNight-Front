@@ -5,7 +5,7 @@ import { URL_API_LOGIN } from "../../config/urls";
 import Button from "../buttons/Button";
 import TextInput from "./inputs/TextInput";
 
-const LogInForm = () => {
+const LogInForm = ({ triggerAlert }) => {
     const {
         register,
         handleSubmit,
@@ -28,11 +28,19 @@ const LogInForm = () => {
 
         try {
             const response = await requestHandler(URL_API_LOGIN, "POST", user);
-            console.log(response)
-            alert(`Bienvenid@ de nuevo ${response.user.name}`);
-            navigate("/");
+            triggerAlert(
+                response.message,
+                () => {
+                    localStorage.setItem("authToken", response.token);
+                    localStorage.setItem("userId", response.user.id);
+                    navigate("/");
+                }
+            );
         } catch (error) {
-            alert(error.message);
+            triggerAlert(
+                error.message,
+                () => {}
+            );
         }
     };
 
@@ -75,6 +83,7 @@ const LogInForm = () => {
                 styles="mt-5"
             />
         </form>
+        
     );
 };
 
