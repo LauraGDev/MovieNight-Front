@@ -18,7 +18,7 @@ const Layout = () => {
             <main className="px-5 relative z-10">
                 <Outlet />
             </main>
-            {(location.pathname != "/") && <Footer />}
+            <Footer />
         </div>
     );
 };
