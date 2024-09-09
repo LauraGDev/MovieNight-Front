@@ -13,7 +13,7 @@ const Layout = () => {
     return (
         <div className={`min-h-screen ${backgroundClass} leading-5 flex flex-col justify-between`}>
             {!showHeader &&
-            <div className="absolute inset-0 bg-bgPurple opacity-95"></div>}
+            <div className="fixed inset-0 bg-bgPurple opacity-95"></div>}
             {showHeader && <Header />}
             <main className="px-5 relative z-10">
                 <Outlet />
