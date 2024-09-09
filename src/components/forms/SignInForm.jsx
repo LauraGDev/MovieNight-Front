@@ -5,7 +5,7 @@ import { URL_API_SIGNIN } from "../../config/urls";
 import Button from "../buttons/Button";
 import TextInput from "./inputs/TextInput";
 
-const SignInForm = () => {
+const SignInForm = ({ triggerAlert }) => {
     const {
         register,
         handleSubmit,
@@ -30,15 +30,37 @@ const SignInForm = () => {
 
         try {
             const response = await requestHandler(URL_API_SIGNIN, "POST", newUser);
-            alert(response.message);
-            navigate("/inicio-sesion");
+            triggerAlert(
+                response.message,
+                () => { navigate("/inicio-sesion");}
+            );
         } catch (error) {
+            let message = error.message;
+            let onAccept = () => {}
+            let onCancel = () => {}
+            let showCancel = false;
+
             if (error.status == 409) {
-                alert(`Error: ${error.message}`);
-                navigate("/inicio-sesion")
+                message += " ¿Acceder al formulario de inicio de sesión?"
+                onAccept = () => {
+                    navigate("/inicio-sesion");
+                }
+                onCancel = () => {
+                    window.location.reload();
+                }
+                showCancel = true;
             } else {
-                alert(error.message);
+                onAccept = () => {
+                    window.location.reload();
+                }
             }
+
+            triggerAlert(
+                message,
+                onAccept,
+                onCancel,
+                showCancel
+            );
         }
     };
 
