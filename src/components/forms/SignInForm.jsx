@@ -29,8 +29,8 @@ const SignInForm = () => {
         };
 
         try {
-            await requestHandler(URL_API_SIGNIN, "POST", newUser);
-            alert("Usuario registrado con éxito!");
+            const response = await requestHandler(URL_API_SIGNIN, "POST", newUser);
+            alert(response.message);
             navigate("/inicio-sesion");
         } catch (error) {
             if (error.status == 409) {
