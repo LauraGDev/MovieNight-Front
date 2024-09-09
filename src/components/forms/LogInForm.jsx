@@ -37,9 +37,24 @@ const LogInForm = ({ triggerAlert }) => {
                 }
             );
         } catch (error) {
+            let message = error.message;
+            let onAccept = () => {}
+            let onCancel = () => {}
+            let showCancel = false;
+
+            if (error.status == 404) {
+                message += " ¿Acceder al formulario de registro?"
+                onAccept = () => {
+                    navigate("/registro");
+                }
+                showCancel = true;
+            }
+
             triggerAlert(
-                error.message,
-                () => {}
+                message,
+                onAccept,
+                onCancel,
+                showCancel
             );
         }
     };
