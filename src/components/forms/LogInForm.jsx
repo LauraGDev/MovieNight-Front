@@ -48,7 +48,7 @@ const LogInForm = ({ triggerAlert }) => {
                     navigate("/registro");
                 }
                 showCancel = true;
-            }
+            } 
 
             triggerAlert(
                 message,
