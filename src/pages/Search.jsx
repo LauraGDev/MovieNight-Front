@@ -2,11 +2,10 @@ import ProfilesGroup from "../components/profileSelector/ProfilesGroup";
 import SearchBar from "../components/search/SearchBar";
 import { useContext } from "react";
 import { ProfileContext } from "../context/profile/ProfileContext";
+import PopularContainer from "../components/search/PopularContainer";
 
 const Search = () => {
     const { profile, setProfile } = useContext(ProfileContext);
-
-    console.log(profile)
 
     const handleProfileSelection = (id) => {
         const profileData = id;
@@ -16,13 +15,8 @@ const Search = () => {
     return (
         <section className="mt-4">
             {!profile && <ProfilesGroup onSelectProfile={handleProfileSelection} />}
-            {profile && 
-            <SearchBar/>}
-            {!profile && (
-                <ProfilesGroup onSelectProfile={handleProfileSelection} />
-            )}
-            {/* {profileSelected && 
-            <} */}
+            {profile && <SearchBar/>}
+            {profile && <PopularContainer/>}
         </section>
     );
 };
