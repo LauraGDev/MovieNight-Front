@@ -9,7 +9,7 @@ const FrontPage = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate("/perfiles");
+            navigate("/buscador");
         }
     }, [navigate, isAuthenticated]);
 
