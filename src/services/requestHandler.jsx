@@ -1,4 +1,4 @@
-export const requestHandler = async (url, method = "GET", data, authentication = '') => {
+export const requestHandler = async (url, method, data, authentication = '') => {
     try {
         const response = await fetch(
             url,
@@ -6,9 +6,9 @@ export const requestHandler = async (url, method = "GET", data, authentication =
                 method: method,
                 headers: {
                     'Content-Type': 'application/json',
-                    authentication
+                    'Authorization': `Bearer ${authentication}`
             },
-                body: JSON.stringify(data),
+                ...(method !== 'GET' && { body: JSON.stringify(data) })
             }
         );
         if (!response.ok) {
@@ -18,7 +18,7 @@ export const requestHandler = async (url, method = "GET", data, authentication =
         const json_data = await response.json();
         return json_data;
     } catch (error) {
-        console.error("Error en la solicitud:", error.message);
+        console.error("Error en la solicitud:", error.message || error);
         throw error;
     }
 };
