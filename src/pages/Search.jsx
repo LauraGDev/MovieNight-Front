@@ -1,4 +1,5 @@
 import ProfilesGroup from "../components/profileSelector/ProfilesGroup";
+import SearchBar from "../components/search/SearchBar";
 import { useContext } from "react";
 import { ProfileContext } from "../context/profile/ProfileContext";
 
@@ -14,6 +15,9 @@ const Search = () => {
 
     return (
         <section className="mt-4">
+            {!profile && <ProfilesGroup onSelectProfile={handleProfileSelection} />}
+            {profile && 
+            <SearchBar/>}
             {!profile && (
                 <ProfilesGroup onSelectProfile={handleProfileSelection} />
             )}
