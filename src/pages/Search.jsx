@@ -1,18 +1,24 @@
-import { useState } from "react";
 import ProfilesGroup from "../components/profileSelector/ProfilesGroup";
+import { useContext } from "react";
+import { ProfileContext } from "../context/profile/ProfileContext";
 
 const Search = () => {
-    const [profileSelected, setProfileSelected] = useState(false)
+    const { profile, setProfile } = useContext(ProfileContext);
+
+    console.log(profile)
+
     const handleProfileSelection = (id) => {
-        console.log(id);
-        setProfileSelected(true);
+        const profileData = id;
+        setProfile(profileData);
     };
-    
+
     return (
         <section className="mt-4">
-            {!profileSelected && <ProfilesGroup onSelectProfile={handleProfileSelection} />}
-            {profileSelected && 
-            <}
+            {!profile && (
+                <ProfilesGroup onSelectProfile={handleProfileSelection} />
+            )}
+            {/* {profileSelected && 
+            <} */}
         </section>
     );
 };

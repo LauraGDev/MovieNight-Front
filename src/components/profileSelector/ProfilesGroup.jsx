@@ -24,8 +24,6 @@ const ProfilesGroup = ( { onSelectProfile }) => {
         }
     };
 
-    console.log(profiles)
-
     const handleClick = (user) => {
         onSelectProfile(user);
     }
