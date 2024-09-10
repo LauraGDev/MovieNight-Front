@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { ProfileProvider } from "../context/profile/ProfileProvider";
 
 const Layout = () => {
     const location = useLocation();
@@ -11,15 +12,20 @@ const Layout = () => {
         : "bg-bgPurple";
 
     return (
-        <div className={`min-h-screen ${backgroundClass} leading-5 flex flex-col justify-between`}>
-            {!showHeader &&
-            <div className="fixed inset-0 bg-bgPurple opacity-95"></div>}
-            {showHeader && <Header />}
-            <main className="px-5 relative z-10">
-                <Outlet />
-            </main>
-            <Footer />
-        </div>
+        <ProfileProvider>
+            <div
+                className={`min-h-screen ${backgroundClass} leading-5 flex flex-col justify-between`}
+            >
+                {!showHeader && (
+                    <div className="fixed inset-0 bg-bgPurple opacity-95"></div>
+                )}
+                {showHeader && <Header />}
+                <main className="px-5 relative z-10">
+                    <Outlet />
+                </main>
+                <Footer />
+            </div>
+        </ProfileProvider>
     );
 };
 
