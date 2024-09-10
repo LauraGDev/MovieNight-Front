@@ -33,7 +33,7 @@ const LogInForm = ({ triggerAlert }) => {
                 () => {
                     localStorage.setItem("authToken", response.token);
                     localStorage.setItem("userId", response.user.id);
-                    navigate("/");
+                    navigate("/buscador");
                 }
             );
         } catch (error) {

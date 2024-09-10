@@ -17,7 +17,7 @@ const Login = () => {
     useEffect(() => {
         console.log(isAuthenticated)
         if (isAuthenticated) {
-            navigate("/perfiles");
+            navigate("/buscador");
         }
     }, [navigate, isAuthenticated]);
 
