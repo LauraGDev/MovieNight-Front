@@ -1,8 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
+import { useAuth } from "../customHooks/useAuth";
+import { useEffect } from "react";
 
 const FrontPage = () => {
+    const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(isAuthenticated)
+        if (isAuthenticated) {
+            navigate("/perfiles");
+        }
+    }, [navigate, isAuthenticated]);
+
     return (
         <section className="flex flex-col justify-center gap-16 pt-44">
             <figure>
