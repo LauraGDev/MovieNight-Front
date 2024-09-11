@@ -1,12 +1,11 @@
 
 
-const Like = ({ liked }) => {
+const Like = ({ id, liked }) => {
     const handleAddClick = () => {
-        alert("Añadir");
-    };
-
+        console.log("añadir " + id);
+    }
     const handleRemoveClick = () => {
-        alert("Eliminar");
+        console.log("eliminar " + id);
     };
 
     return (

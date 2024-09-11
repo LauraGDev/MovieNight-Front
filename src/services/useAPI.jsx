@@ -4,7 +4,7 @@ const useAPI = (url) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
-
+    
     useEffect(() => {
         if(url != null) {
             setLoading(true);
