@@ -28,34 +28,29 @@ const LogInForm = ({ triggerAlert }) => {
 
         try {
             const response = await requestHandler(URL_API_LOGIN, "POST", user);
-            triggerAlert(
-                response.message,
-                () => {
-                    localStorage.setItem("authToken", response.token);
-                    localStorage.setItem("userId", response.user.id);
-                    navigate("/buscador");
-                }
-            );
+            triggerAlert(response.message, () => {
+                const date = new Date();
+                date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+                let expires = "expires=" + date.toUTCString();
+                document.cookie = `authToken=${response.token}; ${expires}; path=/;`;
+                document.cookie = `user=${response.user.id}; ${expires}; path=/;`;
+                navigate("/buscador");
+            });
         } catch (error) {
             let message = error.message;
-            let onAccept = () => {}
-            let onCancel = () => {}
+            let onAccept = () => {};
+            let onCancel = () => {};
             let showCancel = false;
 
             if (error.status == 404) {
-                message += " ¿Acceder al formulario de registro?"
+                message += " ¿Acceder al formulario de registro?";
                 onAccept = () => {
                     navigate("/registro");
-                }
+                };
                 showCancel = true;
-            } 
+            }
 
-            triggerAlert(
-                message,
-                onAccept,
-                onCancel,
-                showCancel
-            );
+            triggerAlert(message, onAccept, onCancel, showCancel);
         }
     };
 
@@ -84,7 +79,7 @@ const LogInForm = ({ triggerAlert }) => {
             <TextInput
                 type="password"
                 {...register("password", {
-                    required: "Debes introducir una contraseña"
+                    required: "Debes introducir una contraseña",
                 })}
                 label="Contraseña"
                 id="password"
@@ -98,7 +93,6 @@ const LogInForm = ({ triggerAlert }) => {
                 styles="mt-5"
             />
         </form>
-        
     );
 };
 

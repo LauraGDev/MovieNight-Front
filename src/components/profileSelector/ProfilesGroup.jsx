@@ -3,26 +3,29 @@ import { requestHandler } from "../../services/requestHandler";
 import { URL_API_GET_PROFILES } from "../../config/urls";
 import AddProfileIcon from "./AddProfileIcon";
 import ProfileIcon from "./ProfileIcon";
+import { useCookie } from "../../customHooks/useCookie";
 
 const ProfilesGroup = ( { onSelectProfile }) => {
-
+    const token = useCookie("authToken");
+    const user = useCookie("user");
     const [ profiles, setProfiles ] = useState([]);
 
     useEffect(() => {
-        fetchUsers();
-    }, []);
-
-    const fetchUsers = async () => {
-        const token = localStorage.getItem('authToken');
-        const user = localStorage.getItem('userId');
-        const url = `${URL_API_GET_PROFILES}/${user}`
-        try {
-            const response = await requestHandler(url, "GET", null, token);
-            setProfiles(response)
-        } catch (error){
-            console.log(error.message);
+        const fetchUsers = async () => {
+            const url = `${URL_API_GET_PROFILES}/${user}`
+            try {
+                const response = await requestHandler(url, "GET", null, token);
+                setProfiles(response)
+            } catch (error){
+                console.log(error.message);
+            }
+        };
+        if (user) {
+            fetchUsers();
         }
-    };
+    }, [user]);
+
+    
 
     const handleClick = (user) => {
         onSelectProfile(user);

@@ -15,7 +15,6 @@ const SignIn = () => {
     const [showCancel, setShowCancel] = useState(false);
 
     useEffect(() => {
-        console.log(isAuthenticated)
         if (isAuthenticated) {
             navigate("/perfiles");
         }
