@@ -11,7 +11,7 @@ export default {
                 secondary: "#5C51A6",
                 accent: "#F2622E",
                 bgPurple: "#160826",
-                whiteText:"#E1E2DE",
+                whiteText:"#F4F4F4",
                 blackText:"#2C2C2C"
             },
             fontFamily: {

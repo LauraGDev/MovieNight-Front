@@ -3,8 +3,8 @@ import NavIcon from "./NavIcon";
 const Header = () => {
     const navLinks = [
         ['/buscador', './assets/search_icon.svg', 'Buscador'],
-        ['/watchlist', './assets/watchlist_icon.svg','Watchlist'],
         ['/que-vemos', './assets/popcorn_icon.svg', '¿Qué Vemos?'],
+        ['/watchlist', './assets/watchlist_icon.svg','Watchlist'],
         ['/perfiles', './assets/profiles_icon.svg', 'Perfiles'],
     ];
 
