@@ -13,7 +13,7 @@ const Search = () => {
     };
 
     return (
-        <section className="mt-4">
+        <section className="mt-6">
             {!profile && <ProfilesGroup onSelectProfile={handleProfileSelection} />}
             {profile && <SearchBar/>}
             {profile && <PopularContainer/>}

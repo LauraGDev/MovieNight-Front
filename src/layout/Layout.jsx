@@ -20,7 +20,7 @@ const Layout = () => {
                     <div className="fixed inset-0 bg-bgPurple opacity-95"></div>
                 )}
                 {showHeader && <Header />}
-                <main className="px-5 relative z-10">
+                <main className="px-5 relative z-10 flex-grow">
                     <Outlet />
                 </main>
                 <Footer />
