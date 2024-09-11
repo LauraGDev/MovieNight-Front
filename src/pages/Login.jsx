@@ -15,7 +15,6 @@ const Login = () => {
     const [showCancel, setShowCancel] = useState(false);
 
     useEffect(() => {
-        console.log(isAuthenticated)
         if (isAuthenticated) {
             navigate("/buscador");
         }

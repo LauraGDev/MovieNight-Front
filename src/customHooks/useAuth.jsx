@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
+import { useCookie } from "./useCookie";
 
 export const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const token = useCookie("authToken");
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []);
+    useEffect(() => {
+        if (token) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    }, [token]);
 
-  return { isAuthenticated };
+    return { isAuthenticated };
 };
