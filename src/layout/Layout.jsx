@@ -1,11 +1,32 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+import { ProfileProvider } from "../context/profile/ProfileProvider";
 
 const Layout = () => {
-  return (
-    <main className="px-5">
-        <Outlet/>
-    </main>
-  )
-}
+    const location = useLocation();
+    const noHeaderRoutes = ["/", "/registro", "/inicio-sesion"];
+    const showHeader = !noHeaderRoutes.includes(location.pathname);
+    const backgroundClass = noHeaderRoutes.includes(location.pathname)
+        ? "bg-center bg-popcorn bg-[length:144.125rem] bg-[-75.75rem_-21.375rem] bg-no-repeat"
+        : "bg-bgPurple";
 
-export default Layout
+    return (
+        <ProfileProvider>
+            <div
+                className={`min-h-screen ${backgroundClass} leading-5 flex flex-col justify-between`}
+            >
+                {!showHeader && (
+                    <div className="fixed inset-0 bg-bgPurple opacity-95"></div>
+                )}
+                {showHeader && <Header />}
+                <main className="px-5 relative z-10 flex-grow">
+                    <Outlet />
+                </main>
+                <Footer />
+            </div>
+        </ProfileProvider>
+    );
+};
+
+export default Layout;

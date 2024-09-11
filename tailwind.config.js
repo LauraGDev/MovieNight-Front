@@ -11,7 +11,7 @@ export default {
                 secondary: "#5C51A6",
                 accent: "#F2622E",
                 bgPurple: "#160826",
-                whiteText:"#E1E2DE",
+                whiteText:"#F4F4F4",
                 blackText:"#2C2C2C"
             },
             fontFamily: {
@@ -20,9 +20,16 @@ export default {
             },
             fontSize: {
                 base: "0.938rem",
+                lg: "1.125rem",
                 "3xl": "1.813rem",
                 "4xl": "2.5rem"
-              }
+            },
+            backgroundImage: {
+                'popcorn': "url('./assets/popcorn-background.jpg')"
+            },
+            borderRadius: {
+                sm: "0.313rem"
+            }
         },
     },
     plugins: [],
