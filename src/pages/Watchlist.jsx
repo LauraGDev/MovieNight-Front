@@ -28,7 +28,7 @@ const Watchlist = () => {
                     setResults(response);
                 } catch (error) {
                     console.log(error.message);
-                    setResults([])
+                    setResults([]);
                 }
             };
 
@@ -36,19 +36,29 @@ const Watchlist = () => {
         } else {
             setResults([]);
         }
-    }, [profile,token]);
+    }, [profile, token]);
 
     return (
         <section className="mt-7 mb-24">
             <h1 className="text-4xl font-syne font-extrabold leading-tight text-primary mb-5">
                 Watchlist
             </h1>
-            <ProfileSelector onSelectProfile={handleProfileSelection} selectedProfileId={profile}/>
-            {results.length > 0 ? (
-                <CardContainer data={results} />
-            ) : (
-                <p>El perfil aún no tiene contenido en su Watchlist.</p>
+            <ProfileSelector
+                onSelectProfile={handleProfileSelection}
+                selectedProfileId={profile}
+            />
+            {profile && (
+                <>
+                    {results.length > 0 ? (
+                        <CardContainer data={results} />
+                    ) : (
+                        <p>El perfil aún no tiene contenido en su Watchlist.</p>
+                    )}
+                </>
             )}
+            {!profile &&
+            <p>Selecciona un perfil para ver el contenido guardado.</p>
+            }
         </section>
     );
 };

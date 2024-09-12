@@ -7,6 +7,7 @@ import PopularContainer from "../components/search/PopularContainer";
 import ResultsContainer from "../components/search/ResultsContainer";
 import Pagination from "../components/search/Pagination";
 import useAPI from "../services/useAPI";
+import Button from "../components/buttons/Button";
 
 const Search = () => {
     const { profile, setProfile } = useContext(ProfileContext);
@@ -21,7 +22,7 @@ const Search = () => {
     useEffect(() => {
         setSearchUrl(`${URL_SEARCH_BY_TITLE}${inputText}&page=${page}`);
         setHasSearched(true);
-        if(inputText==''){
+        if (inputText == "") {
             setSearchUrl("");
             setHasSearched(false);
             setSearchResults([]);
@@ -31,8 +32,12 @@ const Search = () => {
     useEffect(() => {
         if (data) {
             setTotalPages(data.total_pages);
-            let filteredResults = Array.isArray(data?.results) ? data.results : [];
-            filteredResults = filteredResults?.filter( (item) => item.media_type !== "person");
+            let filteredResults = Array.isArray(data?.results)
+                ? data.results
+                : [];
+            filteredResults = filteredResults?.filter(
+                (item) => item.media_type !== "person"
+            );
             setSearchResults(filteredResults);
         }
     }, [data]);
@@ -56,6 +61,14 @@ const Search = () => {
         setPage(newPage);
     };
 
+    const handleResetProfile = () => {
+        setProfile(null);
+        setInputText("");
+        setSearchResults(null);
+        setPage(1);
+        setHasSearched(false);
+    };
+
     return (
         <section className="mt-6">
             {!profile && (
@@ -75,9 +88,9 @@ const Search = () => {
                     )}
                 </>
             )}
-            {profile && !loading && !hasSearched && (
-                <PopularContainer />
-            )}
+            {profile && !loading && !hasSearched && <PopularContainer />}
+
+            {profile && <Button text={'Cambiar de perfil'} color={'primary'} onClick={handleResetProfile} styles={'w-[70%] mx-auto block'}/> }
         </section>
     );
 };
