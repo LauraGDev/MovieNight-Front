@@ -22,7 +22,9 @@ const Search = () => {
         setSearchUrl(`${URL_SEARCH_BY_TITLE}${inputText}&page=${page}`);
         setHasSearched(true);
         if(inputText==''){
+            setSearchUrl("");
             setHasSearched(false);
+            setSearchResults([]);
         }
     }, [inputText, page]);
 
@@ -60,7 +62,7 @@ const Search = () => {
                 <ProfilesGroup onSelectProfile={handleProfileSelection} />
             )}
             {profile && <SearchBar onSubmit={handleSearchResults} />}
-            {loading && <p>Buscando resultados...</p>}
+            {loading && <p className="mt-10 mb-11">Cargando...</p>}
             {profile && !loading && hasSearched && (
                 <>
                     <ResultsContainer results={searchResults} />
@@ -73,7 +75,7 @@ const Search = () => {
                     )}
                 </>
             )}
-            {profile && searchResults.length == 0 && (
+            {profile && !loading && !hasSearched && (
                 <PopularContainer />
             )}
         </section>

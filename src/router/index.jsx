@@ -5,6 +5,7 @@ import SignIn from "../pages/SignIn";
 import Profiles from "../pages/Profiles";
 import FrontPage from "../pages/FrontPage";
 import Search from "../pages/Search";
+import Watchlist from "../pages/Watchlist";
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/watchlist",
-                element: <SignIn />,
+                element: <Watchlist />,
             },
             {
                 path: "/perfiles",
