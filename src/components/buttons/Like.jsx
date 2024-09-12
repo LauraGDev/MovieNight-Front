@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProfileContext } from "../../context/profile/ProfileContext";
 import { URL_API_ADD_CONTENT_PROFILE } from "../../config/urls";
 import { requestHandler } from "../../services/requestHandler";
@@ -8,9 +8,10 @@ const Like = ({ liked, variant = "small", type, data }) => {
     const { profile } = useContext(ProfileContext);
     const token = useCookie("authToken");
     const url = URL_API_ADD_CONTENT_PROFILE(profile);
+    const [isLiked, setIsLiked]=useState(liked);
+
 
     const handleAddClick = () => {
-        console.log(url);
         let apiId, creators = "", director = "", title, originalTitle, releaseDate, length = 0, seasons = 0;
 
         if (type.toLowerCase() === "tv") {
@@ -47,15 +48,13 @@ const Like = ({ liked, variant = "small", type, data }) => {
             genres: data.genres.map(({ name }) => ({ name }))
         };
 
-        console.log(body.genres)
-
         apiRequest(body);
     };
 
     const apiRequest = async (body) => {
         try {
-            const response = await requestHandler(url, "POST", body, token);
-            console.log(response.message);
+            await requestHandler(url, "POST", body, token);
+            setIsLiked(true);
         } catch (error) {
             console.log(error.message);
         }
@@ -73,18 +72,18 @@ const Like = ({ liked, variant = "small", type, data }) => {
     return (
         <button
             className={containerStyles}
-            onClick={liked ? handleRemoveClick : handleAddClick}
+            onClick={isLiked ? handleRemoveClick : handleAddClick}
         >
             <img
                 src={
-                    liked ? "./assets/liked_icon.svg" : "./assets/like_icon.svg"
+                    isLiked ? "./assets/liked_icon.svg" : "./assets/like_icon.svg"
                 }
-                alt={liked ? "Eliminar de watchlist" : "Añadir a watchlist"}
+                alt={isLiked ? "Eliminar de watchlist" : "Añadir a watchlist"}
                 className="transition-all hover:brightness-90"
             />
             {variant === "large" && (
                 <span>
-                    {liked ? "Eliminar de watchlist" : "Añadir a watchlist"}
+                    {isLiked ? "Eliminar de watchlist" : "Añadir a watchlist"}
                 </span>
             )}
         </button>
