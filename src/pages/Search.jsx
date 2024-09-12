@@ -15,10 +15,15 @@ const Search = () => {
     const [inputText, setInputText] = useState("");
     const [searchUrl, setSearchUrl] = useState("");
     const [searchResults, setSearchResults] = useState(null);
+    const [hasSearched, setHasSearched] = useState(false);
     const { data, loading, error } = useAPI(searchUrl);
 
     useEffect(() => {
         setSearchUrl(`${URL_SEARCH_BY_TITLE}${inputText}&page=${page}`);
+        setHasSearched(true);
+        if(inputText==''){
+            setHasSearched(false);
+        }
     }, [inputText, page]);
 
     useEffect(() => {
@@ -55,8 +60,8 @@ const Search = () => {
                 <ProfilesGroup onSelectProfile={handleProfileSelection} />
             )}
             {profile && <SearchBar onSubmit={handleSearchResults} />}
-            {loading && <p>Cargando...</p>}
-            {profile && !loading && searchResults.length > 0 && (
+            {loading && <p>Buscando resultados...</p>}
+            {profile && !loading && hasSearched && (
                 <>
                     <ResultsContainer results={searchResults} />
                     {totalPages > 1 && (
