@@ -23,8 +23,10 @@ const Search = () => {
 
     useEffect(() => {
         if (data) {
-            setSearchResults(data);
             setTotalPages(data.total_pages);
+            let filteredResults = Array.isArray(data?.results) ? data.results : [];
+            filteredResults = filteredResults?.filter( (item) => item.media_type !== "person");
+            setSearchResults(filteredResults);
         }
     }, [data]);
 
@@ -54,7 +56,7 @@ const Search = () => {
             )}
             {profile && <SearchBar onSubmit={handleSearchResults} />}
             {loading && <p>Cargando...</p>}
-            {profile && !loading && searchResults.results.length > 0 && (
+            {profile && !loading && searchResults.length > 0 && (
                 <>
                     <ResultsContainer results={searchResults} />
                     {totalPages > 1 && (
@@ -66,7 +68,7 @@ const Search = () => {
                     )}
                 </>
             )}
-            {profile && searchResults.results.length == 0 && (
+            {profile && searchResults.length == 0 && (
                 <PopularContainer />
             )}
         </section>
