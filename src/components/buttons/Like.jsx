@@ -1,9 +1,17 @@
-const Like = ({ id, liked, variant = "small" }) => {
+
+const Like = ({ liked, variant = "small", type, data }) => {
+
     const handleAddClick = () => {
-        console.log("añadir " + id);
+        if(type.toLowerCase() === 'tv') {
+            console.log("agregar serie: " + data.id);
+            console.log(data)
+        } else if(type.toLowerCase() === 'movie') {
+            console.log("agregar peli: " + data.id);
+            console.log(data)
+        }
     };
     const handleRemoveClick = () => {
-        console.log("eliminar " + id);
+        console.log("eliminar " + data);
     };
 
     const containerStyles =

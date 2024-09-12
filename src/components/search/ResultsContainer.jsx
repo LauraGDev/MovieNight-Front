@@ -13,6 +13,7 @@ const ResultsContainer = ({ results }) => {
                             id={result.id}
                             title={result.name || result.title}
                             photo={result.poster_path}
+                            type={result.media_type}
                         />
                     ))}
                 </div>

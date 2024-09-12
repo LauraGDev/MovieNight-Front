@@ -13,3 +13,5 @@ export const URL_API_GET_PROFILES= `${API_ENDPOINTS_PROFILES}/getProfiles`;
 // The Movie DB API
 export const PHOTO_BASE_URL = "https://image.tmdb.org/t/p/original/";
 export const URL_SEARCH_BY_TITLE = "https://api.themoviedb.org/3/search/multi?include_adult=false&language=es-ES&query="
+export const URL_MOVIE_DETAIL = (id) => `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits&language=es-ES`;
+export const URL_TV_DETAIL = (id) => `https://api.themoviedb.org/3/tv/${id}?append_to_response=credits&language=es-ES`
