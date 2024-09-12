@@ -9,7 +9,6 @@ const Card = ({ id, title, photo='./assets/no_photo.svg', liked=false}) => {
     } else {
         photo = `${photo_url}${photo}`
     }
-    console.log(photo);
     return (
         <article className="relative">
             <img
