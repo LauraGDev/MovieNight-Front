@@ -43,7 +43,7 @@ const Watchlist = () => {
             <h1 className="text-4xl font-syne font-extrabold leading-tight text-primary mb-5">
                 Watchlist
             </h1>
-            <ProfileSelector onSelectProfile={handleProfileSelection} />
+            <ProfileSelector onSelectProfile={handleProfileSelection} selectedProfileId={profile}/>
             {results.length > 0 ? (
                 <CardContainer data={results} />
             ) : (

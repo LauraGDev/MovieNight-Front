@@ -4,7 +4,7 @@ import { URL_API_GET_PROFILES } from "../../config/urls";
 import { requestHandler } from "../../services/requestHandler";
 import ProfileIcon from "../profileSelector/ProfileIcon";
 
-const ProfileSelector = ({ onSelectProfile }) => {
+const ProfileSelector = ({ onSelectProfile, selectedProfileId  }) => {
     const token = useCookie("authToken");
     const user = useCookie("user");
     const [profiles, setProfiles] = useState([]);
@@ -39,6 +39,7 @@ const ProfileSelector = ({ onSelectProfile }) => {
                     photo={profile.profile_photo}
                     onClick={handleClick}
                     horizontal={true}
+                    isSelected={profile.id === selectedProfileId }
                 />
             ))}
         </section>
