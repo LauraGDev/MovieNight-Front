@@ -25,7 +25,7 @@ const AddProfileForm = ({ triggerAlert }) => {
     const onSubmit = async (data) => {
         const newProfile = {
             name: data.name,
-            photo: data.photo,
+            profile_photo: data.photo,
         };
 
         try {
