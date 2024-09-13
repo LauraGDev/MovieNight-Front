@@ -54,7 +54,7 @@ La aplicación permite a los usuarios iniciar sesión, y es a través de esta au
 
 - [Node.js](https://nodejs.org/en)
 - [VSC](https://www.w3schools.com/java/java_intro.asp) con [extensión Java Pack VSC](vscjava.vscode-java-pack), [IntelliJ](https://www.jetbrains.com/es-es/idea/)  or tu IDE de preferencia
-- Base de datos
+- Base de datos SQL
 
 
 ### Configuración del Backend
@@ -67,15 +67,21 @@ La aplicación permite a los usuarios iniciar sesión, y es a través de esta au
 2. Crea una base de datos llamada `movienight` en PostgreSQL.
 
 3. Modifica el archivo `application.properties` en el repositorio del backend:
-    - Comenta la línea `spring.jpa.hibernate.ddl-auto=create`.
-    - Descomenta la línea `spring.jpa.hibernate.ddl-auto=update`.
+    - Añade tus credenciales de PostreSQL y la ruta a tu BBDD.
 
-4. Crea un archivo `.env` en la raíz del repositorio del backend y añade la clave secreta para JWT:
+5. Crea un archivo `.env` en la raíz del repositorio del backend y añade la clave secreta para JWT:
     ```plaintext
     JWT_TOKEN=tu_clave_secreta_aqui
     ```
 
-5. Instala las dependencias y ejecuta el backend
+6. Instala las dependencias y ejecuta el backend
+
+7. Vuelve a modificar el archivo `application.properties` en el repositorio del backend:
+    - Comenta la línea `spring.jpa.hibernate.ddl-auto=create`.
+    - Descomenta la línea `spring.jpa.hibernate.ddl-auto=update`.
+      Si dejas `create` sin comentar, las tablas se crearán de nuevo cada vez que ejecutes el backend. Si quieres mantener los datos existentes, asegúrate de seguir los pasos anteriores.
+
+
 
 ### Configuración del Frontend
 
