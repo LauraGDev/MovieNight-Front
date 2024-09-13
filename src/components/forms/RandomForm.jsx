@@ -29,7 +29,7 @@ const RandomForm = ({ onSubmit }) => {
     }, [user, token]);
 
     const handleSelectedProfiles = (data) => {
-        onSubmit(data);
+        onSubmit(data.selectedProfiles);
     };
 
     return (
