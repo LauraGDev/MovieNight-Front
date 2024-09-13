@@ -50,7 +50,7 @@ const Watchlist = () => {
             {profile && (
                 <>
                     {results.length > 0 ? (
-                        <CardContainer data={results} />
+                        <CardContainer data={results} watchlist={true} />
                     ) : (
                         <p>El perfil aún no tiene contenido en su Watchlist.</p>
                     )}

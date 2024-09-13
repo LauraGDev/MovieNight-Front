@@ -53,7 +53,7 @@ const ProfilesGroup = ({ onSelectProfile }) => {
                             onClick={handleClick}
                         />
                     ))}
-                    <AddProfileIcon onClick={() => navigate(-1)}/>
+                    <AddProfileIcon onClick={() => navigate('/nuevo-perfil')}/>
                 </section>
             )}
         </section>
