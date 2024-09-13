@@ -3,10 +3,10 @@ import { ProfileContext } from "../context/profile/ProfileContext";
 import { URL_SEARCH_BY_TITLE } from "../config/urls";
 import ProfilesGroup from "../components/profileSelector/ProfilesGroup";
 import SearchBar from "../components/search/SearchBar";
-import PopularContainer from "../components/search/PopularContainer";
 import ResultsContainer from "../components/search/ResultsContainer";
 import Pagination from "../components/search/Pagination";
 import useAPI from "../services/useAPI";
+import Button from "../components/buttons/Button";
 
 const Search = () => {
     const { profile, setProfile } = useContext(ProfileContext);
@@ -15,16 +15,29 @@ const Search = () => {
     const [inputText, setInputText] = useState("");
     const [searchUrl, setSearchUrl] = useState("");
     const [searchResults, setSearchResults] = useState(null);
+    const [hasSearched, setHasSearched] = useState(false);
     const { data, loading, error } = useAPI(searchUrl);
 
     useEffect(() => {
         setSearchUrl(`${URL_SEARCH_BY_TITLE}${inputText}&page=${page}`);
+        setHasSearched(true);
+        if (inputText == "") {
+            setSearchUrl("");
+            setHasSearched(false);
+            setSearchResults([]);
+        }
     }, [inputText, page]);
 
     useEffect(() => {
         if (data) {
-            setSearchResults(data);
             setTotalPages(data.total_pages);
+            let filteredResults = Array.isArray(data?.results)
+                ? data.results
+                : [];
+            filteredResults = filteredResults?.filter(
+                (item) => item.media_type !== "person"
+            );
+            setSearchResults(filteredResults);
         }
     }, [data]);
 
@@ -47,14 +60,22 @@ const Search = () => {
         setPage(newPage);
     };
 
+    const handleResetProfile = () => {
+        setProfile(null);
+        setInputText("");
+        setSearchResults(null);
+        setPage(1);
+        setHasSearched(false);
+    };
+
     return (
-        <section className="mt-6">
+        <section className="mt-5 mb-16">
             {!profile && (
                 <ProfilesGroup onSelectProfile={handleProfileSelection} />
             )}
             {profile && <SearchBar onSubmit={handleSearchResults} />}
-            {loading && <p>Cargando...</p>}
-            {profile && !loading && searchResults.results.length > 0 && (
+            {loading && <p className="mt-10 mb-11">Cargando...</p>}
+            {profile && !loading && hasSearched && (
                 <>
                     <ResultsContainer results={searchResults} />
                     {totalPages > 1 && (
@@ -66,9 +87,7 @@ const Search = () => {
                     )}
                 </>
             )}
-            {profile && searchResults.results.length == 0 && (
-                <PopularContainer />
-            )}
+            {profile && <Button text={'Cambiar de perfil'} color={'primary'} onClick={handleResetProfile} styles={'w-[70%] mx-auto block mt-24'}/> }
         </section>
     );
 };
