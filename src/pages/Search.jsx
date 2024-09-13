@@ -70,7 +70,7 @@ const Search = () => {
     };
 
     return (
-        <section className="mt-6">
+        <section className="mt-5 mb-24">
             {!profile && (
                 <ProfilesGroup onSelectProfile={handleProfileSelection} />
             )}

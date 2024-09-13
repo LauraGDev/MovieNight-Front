@@ -39,7 +39,7 @@ const Watchlist = () => {
     }, [profile, token]);
 
     return (
-        <section className="mt-7 mb-24">
+        <section className="mt-5 mb-24">
             <h1 className="text-4xl font-syne font-extrabold leading-tight text-primary mb-5">
                 Watchlist
             </h1>
