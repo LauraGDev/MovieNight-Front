@@ -7,6 +7,7 @@ import FrontPage from "../pages/FrontPage";
 import Search from "../pages/Search";
 import Watchlist from "../pages/Watchlist";
 import RandomSelection from "../pages/RandomSelection";
+import AddProfile from "../pages/addProfile";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             {
                 path: "/buscador",
                 element: <Search />,
+            },
+            { 
+                path: "/nuevo-perfil", 
+                element: <AddProfile /> 
             },
         ],
     },

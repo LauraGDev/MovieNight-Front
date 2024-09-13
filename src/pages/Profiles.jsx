@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
 
 const Profiles = () => {
@@ -17,6 +17,7 @@ const Profiles = () => {
                 styles="h-10"
                 onClick={logout}
             />
+            <Outlet />
         </section>
     );
 };

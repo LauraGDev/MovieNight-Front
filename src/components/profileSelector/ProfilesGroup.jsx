@@ -4,8 +4,10 @@ import { URL_API_GET_PROFILES } from "../../config/urls";
 import AddProfileIcon from "./AddProfileIcon";
 import ProfileIcon from "./ProfileIcon";
 import { useCookie } from "../../customHooks/useCookie";
+import { useNavigate } from "react-router-dom";
 
 const ProfilesGroup = ({ onSelectProfile }) => {
+    const navigate = useNavigate();
     const token = useCookie("authToken");
     const user = useCookie("user");
     const [profiles, setProfiles] = useState([]);
@@ -51,7 +53,7 @@ const ProfilesGroup = ({ onSelectProfile }) => {
                             onClick={handleClick}
                         />
                     ))}
-                    <AddProfileIcon />
+                    <AddProfileIcon onClick={() => navigate(-1)}/>
                 </section>
             )}
         </section>
