@@ -6,6 +6,7 @@ import Profiles from "../pages/Profiles";
 import FrontPage from "../pages/FrontPage";
 import Search from "../pages/Search";
 import Watchlist from "../pages/Watchlist";
+import RandomSelection from "../pages/RandomSelection";
 
 export const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/que-vemos",
-                element: <SignIn />,
+                element: <RandomSelection />,
             },
             {
                 path: "/watchlist",
