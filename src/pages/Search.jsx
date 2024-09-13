@@ -3,7 +3,6 @@ import { ProfileContext } from "../context/profile/ProfileContext";
 import { URL_SEARCH_BY_TITLE } from "../config/urls";
 import ProfilesGroup from "../components/profileSelector/ProfilesGroup";
 import SearchBar from "../components/search/SearchBar";
-import PopularContainer from "../components/search/PopularContainer";
 import ResultsContainer from "../components/search/ResultsContainer";
 import Pagination from "../components/search/Pagination";
 import useAPI from "../services/useAPI";
@@ -70,7 +69,7 @@ const Search = () => {
     };
 
     return (
-        <section className="mt-5 mb-24">
+        <section className="mt-5 mb-16">
             {!profile && (
                 <ProfilesGroup onSelectProfile={handleProfileSelection} />
             )}
@@ -88,9 +87,7 @@ const Search = () => {
                     )}
                 </>
             )}
-            {profile && !loading && !hasSearched && <PopularContainer />}
-
-            {profile && <Button text={'Cambiar de perfil'} color={'primary'} onClick={handleResetProfile} styles={'w-[70%] mx-auto block'}/> }
+            {profile && <Button text={'Cambiar de perfil'} color={'primary'} onClick={handleResetProfile} styles={'w-[70%] mx-auto block mt-24'}/> }
         </section>
     );
 };
